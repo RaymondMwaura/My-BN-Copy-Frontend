@@ -1,7 +1,7 @@
 # Barefoot Nomad (Front-end)
 [![Build Status](https://travis-ci.org/RaymondMwaura/boondocks-bn-frontend.svg?branch=develop)](https://travis-ci.org/RaymondMwaura/boondocks-bn-frontend)
-[![Maintainability](https://api.codeclimate.com/v1/badges/ac62c7b5497ad607f769/maintainability)](https://codeclimate.com/github/RaymondMwaura/boondocks-bn-frontend/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/ac62c7b5497ad607f769/test_coverage)](https://codeclimate.com/github/RaymondMwaura/boondocks-bn-frontend/test_coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/328a8ba972b86e19dd9a/maintainability)](https://codeclimate.com/github/RaymondMwaura/My-BN-Copy-Frontend/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/328a8ba972b86e19dd9a/test_coverage)](https://codeclimate.com/github/RaymondMwaura/My-BN-Copy-Frontend/test_coverage)
 
 ## Vision :telescope:
 Make company global travel and accommodation easy and convenient for the strong workforce of savvy members of staff by leveraging the modern web
