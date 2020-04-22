@@ -1,0 +1,22 @@
+.ratingTextDiv > p {
+  margin-right: 0.938rem;
+}
+
+@media only screen and (max-width: 37.5rem) {
+  .singleHotelMobile{
+    flex-direction: column;
+  }
+  .singleHotelMobile > span{
+    display: none;
+  }
+
+  .singleRatingMobile{
+    flex-direction: column;
+  }
+  .singleRatingMobile > span{
+    display: none;
+  }
+  .buttonRateBlock{
+    margin-top: 1.25rem;
+  }
+}

@@ -1,0 +1,110 @@
+@use "../utilities/variables";
+.responsive-table {
+  font-family: 'lato', sans-serif;
+  li {
+    border-radius: 3px;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  .table-header {
+    background-color: #6c757c;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: white;
+  }
+
+  .table-row {
+    background-color: variables.$color-white;
+    box-shadow: variables.$color-box-shadow;
+    &:hover {
+      background-color: lighten(darken(variables.$color-light-grey, 1), 5);
+      cursor: pointer;
+    }
+  }
+
+  .col {
+    max-width: 100% !important;
+    line-height: 30px!important;
+    min-height: 30px!important;
+  }
+
+  .col-1 {
+    flex-basis: 20%;
+  }
+
+  .col-2 {
+    flex-basis: 35%;
+  }
+
+  .col-3 {
+    flex-basis: 10%;
+  }
+
+  .col-4 {
+    flex-basis: 10%;
+  }
+
+  .col-5 {
+    flex-basis: 23%;
+  }
+
+  .col-6, .col-100 {
+    flex-basis: 2%;
+  }
+
+  .table-row {
+    .col-6, .col-100 {
+      border-radius: 50%;
+      background-color: rgb(255,123,1);
+      color: white;
+      font-size: .8rem;
+      width: 30px;
+      height: 30px;
+      font-weight: bold;
+      padding-left: 6px;
+    }
+    .col-4 {
+      font-weight: bold;
+      &[data-content="td-4-open"] {
+        color: #FFB22E;
+      }
+      &[data-content="td-4-declined"] {
+        color: #ac2342;
+      }
+      &[data-content="td-4-approved"] {
+        color: #4b9448;
+      }
+    }
+  }
+
+  @media all and (max-width: 767px) {
+    .table-header {
+      display: none;
+    }
+    li {
+      display: block;
+    }
+    .col {
+      flex-basis: 100%;
+    }
+    .col {
+      display: flex;
+      padding: 10px 0;
+
+      &:before {
+        color: #6C7A89;
+        padding-right: 10px;
+        content: attr(data-label);
+        flex-basis: 50%;
+        text-align: right;
+      }
+    }
+    .col-6 {
+      display: none;
+    }
+  }
+}

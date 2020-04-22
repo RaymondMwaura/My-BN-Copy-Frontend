@@ -1,0 +1,51 @@
+@use "../utilities/variables" as *;
+
+.btn-round-login{
+  border-radius: 1.7rem;
+  padding-right: 1.7rem;
+  padding-left: 1.7rem;
+}
+
+.btn-rounded-border {
+  border-radius: 3.125rem !important;
+}
+
+.social-btns {
+  margin-top: 1.875rem;
+
+  > button {
+    width: 100%;
+    margin: 0.3125rem;
+  }
+
+  .btn {
+    &-facebook, &-google {
+      color: $color-white;
+      text-align: center !important
+    }
+
+    &-facebook {
+      background-color: $color-blue-facebook;
+
+      &:hover {
+        background-color: darken($color-blue-facebook, 10%);
+      }
+    }
+
+    &-google {
+      background-color: $color-red-google;
+
+      &:hover {
+        background-color: darken($color-red-google, 10%);
+      }
+    }
+  }
+}
+
+.btn-trips{
+  border-radius: 2.5rem;
+  padding-right: 2rem;
+  padding-left: 2rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}

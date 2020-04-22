@@ -1,0 +1,12 @@
+@use '../utilities/variables' as *;
+
+footer {
+  background-color: $color-white;
+  padding: .8rem 0 !important;
+  box-shadow: 0 0.625rem 1.875rem 0 $color-box-shadow;
+}
+
+.socials > i {
+  margin: 0 .8rem;
+  font-size: 1.2rem;
+}

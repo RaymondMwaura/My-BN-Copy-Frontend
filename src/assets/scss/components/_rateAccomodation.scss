@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+.no-border-modal{
+  border-top: 0 none;
+}
+.no-border-modal > span {
+  flex-grow: 1; 
+}
+.rateModalContent{
+  margin: 1.25rem;
+}
+.rateModalHeading{
+  margin-top: 1.875rem;
+}
+.rateModalHeading{
+  margin-top: 1.875rem;
+}
+.rateModalBody{
+  margin-top: 1.875rem;
+}
+.rateModalButtons{
+  margin-top: 3.125rem;
+}
+.rateModalText{
+  font-family: 'Montserrat';
+}
+.modal-body > span:nth-child(1) > span:nth-child(1),
+.modal-body > span:nth-child(1) > span:nth-child(2),
+.modal-body > span:nth-child(1) > span:nth-child(3),
+.modal-body > span:nth-child(1) > span:nth-child(4)
+{
+  margin-right: 0.938rem;
+}
+@media only screen and (max-width: 37.5rem) {
+  .rateModalButtons{
+    flex-direction: column;
+  }
+  .rateModalText{
+    font-size: 1.063rem;
+  }
+}

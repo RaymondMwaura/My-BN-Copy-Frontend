@@ -1,0 +1,23 @@
+.profilePicDiv{
+  display: flex;
+  flex-direction: column;
+}
+.profilePicImg{
+  height: 12.5rem;
+  width: 12.5rem;
+  background-image: cover;
+  object-fit: contain;
+}
+.profilePicViewsRender{
+  height: 3.125rem;
+  width: 3.125rem;
+  border-radius: 50%;
+}
+.profilePicContainer{
+  display: flex;
+  justify-content: center;
+  flex-direction: column-reverse;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}

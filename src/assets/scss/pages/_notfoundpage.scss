@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css?family=Russo+One&display=swap');
+@import '../utilities/_variables.scss';
+
+.page_404 {
+  position: relative;
+  top: 50%;
+  background: $color-white;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin:auto;
+}
+
+.page_404 img {
+  width: 100%;
+}
+
+.four_zero_four_bg {
+  background-image: url(https://res.cloudinary.com/dhglc7nzy/image/upload/v1581071884/dribbble_1_ioxvp1.gif);
+  height: 25rem;
+  font-family: 'Russo One', sans-serif;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.four_zero_four_bg h1 {
+  font-size: 5rem;
+}
+
+.four_zero_four_bg h3 {
+  font-size: 5rem;
+}
+
+.link_404 {
+  color: $color-white !important;
+  padding: 10px 20px;
+  background: $color-success;
+  border-radius: 5px;
+  margin: 20px 0;
+  display: inline-block;
+}
+
+.contant_box_404 {
+  margin-top: -50px;
+}

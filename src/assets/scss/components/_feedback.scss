@@ -1,0 +1,26 @@
+@use "../utilities/variables";
+
+.feed-box {
+  padding: 1rem!important;
+}
+
+.hotel-container {
+  margin-top: 3rem;
+  .upper {
+    margin-top: 0;
+  }
+
+  .card .hotel {
+    border: none;
+  }
+
+  .icon-feedback {
+    height: 1.875rem;
+    width: 1.875rem;
+    border-radius: 3.125rem;
+    background: variables.$color-orange;
+    line-height: 1.875rem;
+    text-align: center;
+    color: variables.$color-white;
+  }
+}

@@ -1,0 +1,55 @@
+@use '../utilities/variables' as *;
+@use '../base/typography';
+@use "../base/normalize";
+@use '../components/footer';
+@use '../components/icons';
+@use '../components/buttons';
+@use '../components/forms';
+@use '../components/login';
+@use '../components/navigation';
+@use '../components/loader';
+@use '../components/pagination';
+@use '../components/table';
+@use '../components/card';
+@use '../components/cards';
+@use './requestPage';
+@use '../components/comments';
+@use '../components/createTrips';
+@use '../components/chat';
+@use '../components/accordion';
+@use '../components/travelstats';
+@use '../components/like';
+@use './travelPage';
+@use 'loginTwoFAPage';
+@use '../components/rateAccomodation';
+@use '../components/hotel';
+@use './notfoundpage';
+@use './components/createTripSuccess';
+@use '../components/editProfile';
+
+
+body {
+  color: $color-black-text;
+  font-size:  typography.$font-size;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+.App {
+  min-height: calc(100vh - .5rem);
+  background-color: $color-whitesmoke;
+}
+
+.mt-7 {
+  margin-top: 7rem;
+}
+
+.mt-7 {
+  margin-top: 7rem;
+}
+
+.mt-5 {
+  margin-top: 5rem;
+}
