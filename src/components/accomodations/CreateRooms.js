@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -6,7 +7,6 @@ import InputForm from '../templates/InputForm';
 import Button from '../templates/Button';
 import TextArea from '../templates/TextArea';
 import InputFile from '../templates/InputFile';
-import SelectInput from '../templates/SelectInput';
 import { validation } from '../../utils/validations';
 import { roomFields, roomTextArea, typeSelect } from '../../utils/roomFields';
 // eslint-disable-next-line max-len
@@ -17,7 +17,7 @@ export class CreateRooms extends Component {
 		super(props);
 		this.state = {
 			name: '',
-			type: '',
+			type: null,
 			cost: '',
 			description: '',
 			image: null,
@@ -110,16 +110,28 @@ export class CreateRooms extends Component {
 								/>
 							),
 						)}
-						<SelectInput
-							name='type'
-							value={state.type}
-							label='Type'
-							data-test='type'
-							placeholder='type'
-							option={typeSelect}
-							onChange={event => this.handleChange(event)}
-							classNames='form-control'
-						/>
+						<div data-test='input-form' className='form-group'>
+							<label htmlFor='type'>Type</label>
+							<select
+								className='form-control'
+								required
+								name='type'
+								onChange={event => this.handleChange(event)}
+							>
+								<option value=''>type</option>
+								{typeSelect.map(({ value, name, id }) => (
+									<option key={id} value={value}>
+										{name}
+									</option>
+								))}
+							</select>
+							{validation.isRequired.error &&
+								validation.isRequired.error !== '' && (
+									<span data-testid='error-text' className='invalid-feedback'>
+										{validation.isRequired.error}
+									</span>
+								)}
+						</div>
 						<InputFile
 							name='image'
 							data-test='file'
