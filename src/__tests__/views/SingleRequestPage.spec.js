@@ -19,12 +19,14 @@ import {
 	getSingleRequest,
 	updateRequestStatus,
 } from '../../lib/services/requests.service';
+import { getHotels } from '../../lib/services/accommodation.service';
 
 global.localStorage = localStorage;
 jest.mock('../../utils/api');
 jest.mock('../../lib/services/commentService')
 jest.mock('../../lib/services/requests.service');
 jest.mock('universal-cookie', () => jest.fn());
+jest.mock('../../lib/services/accommodation.service');
 Cookies.mockImplementation(() => ({
 	get: () =>
 		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdpbGRuaXkwNUBnbWFpbC5jb20iLCJuYW1lIjoiR2lsZGFzIiwidXNlcklkIjoxLCJ2ZXJpZmllZCI6dHJ1ZSwicm9sZSI6InJlcXVlc3RlciIsImxpbmVNYW5hZ2VySWQiOm51bGwsImlhdCI6MTU3ODU3MTM0OSwiZXhwIjoxNTc4NjU3NzQ5fQ.SmBRYQ-zYgEl08jObfqrtFjrJTCU33-DsMGCRC2RZuc',
@@ -97,6 +99,37 @@ const request = {
 	}
 }
 
+const hotels = {
+	data: {
+		status: 'success',
+		message: 'Hotels retrieved successfully',
+		data: [
+			{
+				id: 1,
+				name: 'Golden Hotel',
+				image: '1587473844293-Luxury-Hotel.jpg',
+				description: 'The best hotel ever built',
+				street: 'Gold Street',
+				services: 'Everything you ever wished for',
+				average_rating: '0.00',
+				createdAt: '2020-04-21T12:57:40.975Z',
+				likesCount: '0',
+				unLikesCount: '0',
+				likes: [],
+				location: {
+					id: 1,
+					country: 'Kenya',
+					city: 'Nairobi',
+					long: null,
+					lat: null,
+					createdAt: '2020-04-21T11:42:17.638Z',
+					updatedAt: '2020-04-21T11:42:17.638Z',
+				},
+			},
+		],
+	},
+};
+
 beforeEach(() => {
 	global.localStorage.setItem("bn_user_data", `{
 		"email":"requestero@user.com",
@@ -166,24 +199,24 @@ describe('Single request view', () => {
 			request: {},
 		}
 	};
-	test('Users should be able to able to view single request', async() => {
+	test('Users should be able to view single request', async() => {
+		getHotels.mockImplementation(() => Promise.resolve(hotels));
 		const { getByText }  = render(<SingleRequestPage match={{params : {id:1}}}/>);
-
 		await waitForElement(()=> getByText('Approve'));
 		expect(getByText('Approve')).toBeInTheDocument();
 		expect(getByText('Request Details')).toBeInTheDocument();
 	});
 	test('Users should be able to post comment', async() => {
+		getHotels.mockImplementation(() => Promise.resolve(hotels));
 		const { getByText, getByPlaceholderText }  = render(<SingleRequestPage match={{params : {id:1}}}/>);
-
 		const [commentButton, commemntBox] = 
 		await waitForElement(()=> [getByText('Add comment'), getByPlaceholderText('Enter your comment here')]);
 		fireEvent.change(commemntBox, {target : {value: 'comment'}})
 		fireEvent.click(commentButton)
 	});
 	test('Users should be able to delete their posted comment', async() => {
+		getHotels.mockImplementation(() => Promise.resolve(hotels));
 		const { getAllByText, getAllByTestId }  = render(<SingleRequestPage match={{params : {id:1}}}/>);
-
 		const [closeButton] = 
 		await waitForElement(()=> [getAllByTestId('close')]);
 		fireEvent.click(closeButton[0])
@@ -195,69 +228,53 @@ describe('Single request view', () => {
 		fireEvent.click(cancelButton[2])
     });
 	test("Manager can ", async () => {
-
+		getHotels.mockImplementation(() => Promise.resolve(hotels));
 		getSingleRequest.mockImplementation(() => Promise.resolve(approvedRequest));
 		updateRequestStatus.mockImplementation(() => Promise.resolve(approvedRequest));
-
 		const { getByText, getAllByText } = render(<SingleRequestPage match={{params : {id:1}}}/>);
-
 		const declineBtn = await waitForElement(
 			() => getByText('Decline').closest('button')
 		);
-
 		await act( async () => {
 			fireEvent.click(declineBtn);
 		});
-
 		const confirmBtn = await waitForElement(
 			() => getAllByText('Confirm')
 		);
-
 		await act(async () => {
 			fireEvent.click(confirmBtn[0]);
 		});
-
 	});
 
 	test("Manager can approve request", async () => {
-
+		getHotels.mockImplementation(() => Promise.resolve(hotels));
 		getSingleRequest.mockImplementation(() => Promise.resolve(declinedRequest));
 		updateRequestStatus.mockImplementation(() => Promise.resolve(declinedRequest));
-
 		const { getByText, getAllByText } = render(<SingleRequestPage match={{params : {id:1}}}/>);
-
 		const approveBtn = await waitForElement(
 			() => getByText('Approve').closest('button')
 		);
-
 		await act( async () => {
 			fireEvent.click(approveBtn);
 		});
-
 		const confirmBtn = await waitForElement(
 			() => getAllByText('Confirm')
 		);
-
 		await act( async () => {
 			fireEvent.click(confirmBtn[1]);
 		});
-
 	});
 
 	test("Manager cancel request reject/approve", async () => {
-
+		getHotels.mockImplementation(() => Promise.resolve(hotels));
 		getSingleRequest.mockImplementation(() => Promise.resolve(declinedRequest));
 		updateRequestStatus.mockImplementation(() => Promise.resolve(declinedRequest));
-
 		const { getByText, getAllByText } = render(<SingleRequestPage match={{params : {id:1}}}/>);
-
 		const cancelBtn = await waitForElement(
 			() => getAllByText('Cancel')
 		);
-
 		await act( async () => {
 			fireEvent.click(cancelBtn[1]);
 		});
-
 	});
 });

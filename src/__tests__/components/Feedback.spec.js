@@ -15,11 +15,12 @@ import { BrowserRouter } from 'react-router-dom';
 import moment from 'moment';
 import { createMemoryHistory } from 'history';
 import Feedback from '../../components/Feedback';
-import { getByTestId, wait } from '@testing-library/dom';
+import { getByTestId, waitFor } from '@testing-library/dom';
 import {
 	fetchFeedback,
 	sendFeedback,
 } from '../../lib/services/feedbackService';
+import { getHotels } from '../../lib/services/accommodation.service';
 
 global.localStorage = localStorage;
 global.$ = jest.fn((cb) => ({
@@ -30,6 +31,7 @@ global.$ = jest.fn((cb) => ({
 }));
 jest.mock('universal-cookie');
 jest.mock('../../lib/services/feedbackService');
+jest.mock('../../lib/services/accommodation.service');
 
 Cookies.mockImplementation(() => ({ get: () => token }));
 
@@ -66,10 +68,43 @@ const feedback = {
 		],
 	}
 };
+
+const hotels = {
+	data: {
+		status: 'success',
+		message: 'Hotels retrieved successfully',
+		data: [
+			{
+				id: 1,
+				name: 'Golden Hotel',
+				image: '1587473844293-Luxury-Hotel.jpg',
+				description: 'The best hotel ever built',
+				street: 'Gold Street',
+				services: 'Everything you ever wished for',
+				average_rating: '0.00',
+				createdAt: '2020-04-21T12:57:40.975Z',
+				likesCount: '0',
+				unLikesCount: '0',
+				likes: [],
+				location: {
+					id: 1,
+					country: 'Kenya',
+					city: 'Nairobi',
+					long: null,
+					lat: null,
+					createdAt: '2020-04-21T11:42:17.638Z',
+					updatedAt: '2020-04-21T11:42:17.638Z',
+				},
+			},
+		],
+	},
+};
+
 fetchFeedback.mockImplementation(() => Promise.resolve(feedback));
 describe('Feedback component', () => {
 	let props;
 	test("Hotel owner can view feedback", async () => {
+		getHotels.mockImplementation(() => Promise.resolve(hotels));
 		sendFeedback.mockImplementation(() => Promise.resolve({ data: { message: 'success'}}));
 		global.localStorage.setItem("bn_user_data", `{
 			"email":"requestero@user.com",
@@ -92,12 +127,13 @@ describe('Feedback component', () => {
 			</BrowserRouter>
 		);
 
-		await wait(() => {
+		await waitFor(() => {
 			expect(getByText('John Doe')).toBeInTheDocument();
 		})
 	});
 
 	test("Requester can view and share feedback", async () => {
+		getHotels.mockImplementation(() => Promise.resolve(hotels));
 		sendFeedback.mockImplementation(() => Promise.resolve({ data: { message: 'success'}}));
 		global.localStorage.setItem("bn_user_data", `{
 			"email":"requestero@user.com",
@@ -120,7 +156,7 @@ describe('Feedback component', () => {
 			</BrowserRouter>
 		);
 
-		await wait(() => {
+		await waitFor(() => {
 			expect(getByText('John Doe')).toBeInTheDocument();
 		})
 
@@ -134,6 +170,7 @@ describe('Feedback component', () => {
 	});
 
 	test("Requester can not see success message in case of fetch error", async () => {
+		getHotels.mockImplementation(() => Promise.resolve(hotels));
 		sendFeedback.mockImplementation(() => Promise.resolve(undefined));
 		global.localStorage.setItem("bn_user_data", `{
 			"email":"requestero@user.com",

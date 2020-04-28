@@ -1,5 +1,5 @@
 # Barefoot Nomad (Front-end)
-[![Build Status](https://travis-ci.org/RaymondMwaura/boondocks-bn-frontend.svg?branch=develop)](https://travis-ci.org/RaymondMwaura/boondocks-bn-frontend)
+[![Build Status](https://travis-ci.org/RaymondMwaura/My-BN-Copy-Frontend.svg?branch=develop)](https://travis-ci.org/RaymondMwaura/My-BN-Copy-Frontend)
 [![Maintainability](https://api.codeclimate.com/v1/badges/328a8ba972b86e19dd9a/maintainability)](https://codeclimate.com/github/RaymondMwaura/My-BN-Copy-Frontend/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/328a8ba972b86e19dd9a/test_coverage)](https://codeclimate.com/github/RaymondMwaura/My-BN-Copy-Frontend/test_coverage)
 

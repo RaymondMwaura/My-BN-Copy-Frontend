@@ -9,8 +9,10 @@ import {
 	SET_STATS,
 } from '../types';
 import actionFunc from '../../../utils/actionFunc';
-import apiCall from '../../../utils/api';
-import { getHotelById } from '../../../lib/services/accommodation.service';
+import {
+	getHotelById,
+	getHotels,
+} from '../../../lib/services/accommodation.service';
 import { getRatingData } from './rateAccomodationActions';
 
 export const getAllHotels = () => async (dispatch, getState) => {
@@ -20,7 +22,7 @@ export const getAllHotels = () => async (dispatch, getState) => {
 		if (localStorage.bn_user_data !== undefined) {
 			userId = JSON.parse(localStorage.bn_user_data).userId;
 		}
-		const res = await apiCall.get(`/hotels`);
+		const res = await getHotels();
 		dispatch(actionFunc(FETCH_HOTEL_SUCCESS, res.data));
 		if (localStorage.bn_user_data !== undefined) {
 			const { role } = JSON.parse(localStorage.bn_user_data);

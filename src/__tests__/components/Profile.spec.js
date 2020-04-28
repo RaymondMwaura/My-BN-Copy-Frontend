@@ -25,7 +25,7 @@ import Cookies from "universal-cookie";
 import token from '../../__mocks__/token';
 import { getAllRequests } from "../../lib/services/requests.service";
 import { getUserBooking } from "../../lib/services/booking.service";
-import { getAllHotels } from "../../store/actions/accomodations/getAccomodationActions";
+import { getHotels } from '../../lib/services/accommodation.service';
 global.localStorage = localStorage;
 
 global.localStorage.setItem("bn_user_data", `{
@@ -43,7 +43,7 @@ jest.mock("../../lib/services/user.service");
 jest.mock("../../lib/services/requests.service");
 jest.mock("../../lib/services/booking.service");
 jest.mock("../../store/actions/users/usersActions");
-jest.mock("../../store/actions/accomodations/getAccomodationActions");
+jest.mock('../../lib/services/accommodation.service');
 
 jest.mock("universal-cookie");
 Cookies.mockImplementation(() => ({ get: () => token }));
@@ -55,6 +55,37 @@ const render = (ui, initialState = {}, options = {}) => {
 		<Provider store={store}>{children}</Provider>
 	);
 	return reactRender(ui, { wrapper: Providers, ...options });
+};
+
+const hotels = {
+	data: {
+		status: 'success',
+		message: 'Hotels retrieved successfully',
+		data: [
+			{
+				id: 1,
+				name: 'Golden Hotel',
+				image: '1587473844293-Luxury-Hotel.jpg',
+				description: 'The best hotel ever built',
+				street: 'Gold Street',
+				services: 'Everything you ever wished for',
+				average_rating: '0.00',
+				createdAt: '2020-04-21T12:57:40.975Z',
+				likesCount: '0',
+				unLikesCount: '0',
+				likes: [],
+				location: {
+					id: 1,
+					country: 'Kenya',
+					city: 'Nairobi',
+					long: null,
+					lat: null,
+					createdAt: '2020-04-21T11:42:17.638Z',
+					updatedAt: '2020-04-21T11:42:17.638Z',
+				},
+			},
+		],
+	},
 };
 
 describe('User should be be able to view and edit profile', () => {
@@ -143,7 +174,7 @@ describe('User should be be able to view and edit profile', () => {
 			currentUserId: null
 		}
   };
-  
+
   getAllRequests.mockImplementation(() => Promise.resolve({
     data: {
       data: []
@@ -159,9 +190,7 @@ describe('User should be be able to view and edit profile', () => {
       data: []
     }
   }));
-  getAllHotels.mockImplementation(() => Promise.resolve({
-    data: {data: []}
-  }))
+
 	getUserProfile.mockImplementation(() => Promise.resolve(userProfile));
 	getUsers.mockImplementation(() => Promise.resolve(managers));
 	beforeEach(() => {
@@ -193,8 +222,9 @@ describe('User should be be able to view and edit profile', () => {
 		localStorage.store = {};
 	});
 
-	afterEach(cleanup);
+	// afterEach(cleanup);
 	test('User can view profile information', async () => {
+		getHotels.mockImplementation(() => Promise.resolve(hotels));
 		getUserProfile.mockImplementation(() => Promise.resolve(userProfile));
 		const { getByText, getByTestId } = render(ViewComponent, initialState);
 		const profileTitle = await waitForElement(
@@ -208,6 +238,7 @@ describe('User should be be able to view and edit profile', () => {
 	});
 
 	test('User can view profile without a line manager information', async () => {
+		getHotels.mockImplementation(() => Promise.resolve(hotels));
 		getUserProfile.mockImplementation(() => Promise.resolve(userWithoutManager));
 		const { getByText, getByTestId } = render(ViewComponent, initialState);
 		const profileTitle = await waitForElement(
@@ -221,6 +252,7 @@ describe('User should be be able to view and edit profile', () => {
 	});
 
 	test('User can edit profile information', async () => {
+		getHotels.mockImplementation(() => Promise.resolve(hotels));
 		getUserProfile.mockImplementation(() => Promise.resolve(userProfile));
     const { getByText, getByDisplayValue, getByPlaceholderText } = render(EditComponent, initialState);
 
@@ -252,6 +284,7 @@ describe('User should be be able to view and edit profile', () => {
 	});
 
 	test('User can revert profile changes', async () => {
+		getHotels.mockImplementation(() => Promise.resolve(hotels));
 		getUserProfile.mockImplementation(() => Promise.resolve(userProfile));
 		const { getByDisplayValue, getByText, getByPlaceholderText } = render(EditComponent, initialState);
 		await waitForElement(
@@ -270,6 +303,7 @@ describe('User should be be able to view and edit profile', () => {
 	});
 
 	test('User can save profile changes', async () => {
+		getHotels.mockImplementation(() => Promise.resolve(hotels));
 		getUserProfile.mockImplementation(() => Promise.resolve(userWithoutManager));
 		const { getByText, getByDisplayValue, getByPlaceholderText, getByLabelText } = render(EditComponent, initialState);
 		await waitForElement(
@@ -312,6 +346,7 @@ describe('User should be be able to view and edit profile', () => {
 	});
 
 	test('User can not save profile changes with errors', async () => {
+		getHotels.mockImplementation(() => Promise.resolve(hotels));
 		getUserProfile.mockImplementation(() => Promise.resolve(userProfile));
 		const { getByText, getByPlaceholderText, getByDisplayValue } = render(EditComponent, initialState);
 		await waitForElement(
@@ -353,8 +388,8 @@ describe('User should be be able to view and edit profile', () => {
 		fireEvent.click(saveButton);
   });
   
-  // my tests start here
   test('User can edit profile information including profile picture upload', async () => {
+	getHotels.mockImplementation(() => Promise.resolve(hotels));
 		getUserProfile.mockImplementation(() => Promise.resolve(userProfile));
     const { getByTestId, getByText, getByDisplayValue, getByPlaceholderText } = render(EditComponent, initialState);
 
