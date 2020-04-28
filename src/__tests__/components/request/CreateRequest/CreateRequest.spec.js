@@ -403,38 +403,44 @@ describe(' ', () => {
 
     const [
 			departmentField,
-			firstNameField,
+      firstNameField,
+      lastNameField,
 			managerField,
-			genderField,
+      genderField,
+      residenceAddress,
 			currencyField,
 			languageField,
 			rememberInfo,
       submitButton,
+      nextStep,
     ] = await waitForElement(() => [
 			getByPlaceholderText('Enter Department'),
-			getByPlaceholderText('Enter First Name'),
+      getByPlaceholderText('Enter First Name'),
+      getByPlaceholderText('Enter Last Name'),
 			getByPlaceholderText('Line Manager'),
-			getByPlaceholderText('Select Gender'),
+      getByPlaceholderText('Select Gender'),
+      getByPlaceholderText('Enter Residence Address'),
 			getByPlaceholderText('Preferred Currency'),
 			getByPlaceholderText('Preferred Language'),
       getByTestId('remember'),
       getByTestId('form-user'),
+      getByTestId('nextStep'),
     ]);
 
-		fireEvent.change(firstNameField, { target: { value: ''}});
+    fireEvent.change(firstNameField, { target: { value: 'Dante'}});
     fireEvent.blur(firstNameField);
     
-    fireEvent.change(firstNameField, { target: { value: 'd'}});
-    fireEvent.blur(firstNameField);
-    
-    fireEvent.change(firstNameField, { target: { value: ''}});
-		fireEvent.blur(firstNameField);
+    fireEvent.change(lastNameField, { target: { value: 'Alighieri'}});
+		fireEvent.blur(lastNameField);
 
-		fireEvent.change(departmentField, { target: { value: ''}});
+		fireEvent.change(departmentField, { target: { value: 'Literary'}});
 		fireEvent.blur(departmentField);
 
-		fireEvent.change(genderField, { target: { value: 'male'}});
-		fireEvent.blur(genderField);
+		fireEvent.change(genderField, { target: { value: 'Male'}});
+    fireEvent.blur(genderField);
+    
+    fireEvent.change(residenceAddress, { target: { value: 'Rome'}});
+		fireEvent.blur(residenceAddress);
 
 		fireEvent.change(currencyField, { target: { value: 'Dollars'}});
 		fireEvent.blur(currencyField);
@@ -445,17 +451,9 @@ describe(' ', () => {
 		fireEvent.change(managerField, { target: { value: '1'}});
     fireEvent.blur(managerField);
     
-    fireEvent.click(rememberInfo)
-
-    fireEvent.submit(submitButton, {preventDefault: jest.fn()});
-
-    fireEvent.change(firstNameField, { target: { value: 'user'}});
-		fireEvent.blur(firstNameField);
-
-		fireEvent.change(departmentField, { target: { value: 'devops'}});
-    fireEvent.blur(departmentField);
+    fireEvent.click(rememberInfo);
     
-    fireEvent.submit(submitButton, {preventDefault: jest.fn()});
+    fireEvent.click(nextStep);
     
     const [
       oneWayTypeField,
@@ -510,38 +508,44 @@ describe(' ', () => {
 
     const [
 			departmentField,
-			firstNameField,
+      firstNameField,
+      lastNameField,
 			managerField,
-			genderField,
+      genderField,
+      residenceAddress,
 			currencyField,
 			languageField,
 			rememberInfo,
       submitButton,
+      nextStep,
     ] = await waitForElement(() => [
 			getByPlaceholderText('Enter Department'),
-			getByPlaceholderText('Enter First Name'),
+      getByPlaceholderText('Enter First Name'),
+      getByPlaceholderText('Enter Last Name'),
 			getByPlaceholderText('Line Manager'),
-			getByPlaceholderText('Select Gender'),
+      getByPlaceholderText('Select Gender'),
+      getByPlaceholderText('Enter Residence Address'),
 			getByPlaceholderText('Preferred Currency'),
 			getByPlaceholderText('Preferred Language'),
       getByTestId('remember'),
       getByTestId('form-user'),
+      getByTestId('nextStep'),
     ]);
 
-		fireEvent.change(firstNameField, { target: { value: ''}});
+		fireEvent.change(firstNameField, { target: { value: 'Dante'}});
     fireEvent.blur(firstNameField);
     
-    fireEvent.change(firstNameField, { target: { value: 'd'}});
-    fireEvent.blur(firstNameField);
-    
-    fireEvent.change(firstNameField, { target: { value: ''}});
-		fireEvent.blur(firstNameField);
+    fireEvent.change(lastNameField, { target: { value: 'Alighieri'}});
+    fireEvent.blur(lastNameField);
 
-		fireEvent.change(departmentField, { target: { value: ''}});
+		fireEvent.change(departmentField, { target: { value: 'Literary'}});
 		fireEvent.blur(departmentField);
 
-		fireEvent.change(genderField, { target: { value: 'male'}});
-		fireEvent.blur(genderField);
+    fireEvent.change(genderField, { target: { value: 'Male'}});
+    fireEvent.blur(genderField);
+    
+    fireEvent.change(residenceAddress, { target: { value: 'Rome'}});
+		fireEvent.blur(residenceAddress);
 
 		fireEvent.change(currencyField, { target: { value: 'Dollars'}});
 		fireEvent.blur(currencyField);
@@ -552,17 +556,9 @@ describe(' ', () => {
 		fireEvent.change(managerField, { target: { value: '1'}});
     fireEvent.blur(managerField);
     
-    fireEvent.click(rememberInfo)
-
-    fireEvent.submit(submitButton, {preventDefault: jest.fn()});
-
-    fireEvent.change(firstNameField, { target: { value: 'user'}});
-		fireEvent.blur(firstNameField);
-
-		fireEvent.change(departmentField, { target: { value: 'devops'}});
-    fireEvent.blur(departmentField);
+    fireEvent.click(rememberInfo);
     
-    fireEvent.submit(submitButton, {preventDefault: jest.fn()});
+    fireEvent.click(nextStep);
 
     const [
       returnTypeField,
@@ -619,38 +615,44 @@ describe(' ', () => {
 
     const [
 			departmentField,
-			firstNameField,
+      firstNameField,
+      lastNameField,
 			managerField,
-			genderField,
+      genderField,
+      residenceAddress,
 			currencyField,
 			languageField,
 			rememberInfo,
       submitButton,
+      nextStep,
     ] = await waitForElement(() => [
 			getByPlaceholderText('Enter Department'),
-			getByPlaceholderText('Enter First Name'),
+      getByPlaceholderText('Enter First Name'),
+      getByPlaceholderText('Enter Last Name'),
 			getByPlaceholderText('Line Manager'),
-			getByPlaceholderText('Select Gender'),
+      getByPlaceholderText('Select Gender'),
+      getByPlaceholderText('Enter Residence Address'),
 			getByPlaceholderText('Preferred Currency'),
 			getByPlaceholderText('Preferred Language'),
       getByTestId('remember'),
       getByTestId('form-user'),
+      getByTestId('nextStep'),
     ]);
 
-		fireEvent.change(firstNameField, { target: { value: ''}});
+		fireEvent.change(firstNameField, { target: { value: 'Dante'}});
     fireEvent.blur(firstNameField);
     
-    fireEvent.change(firstNameField, { target: { value: 'd'}});
-    fireEvent.blur(firstNameField);
+    fireEvent.change(lastNameField, { target: { value: 'Alghieri'}});
+    fireEvent.blur(lastNameField);
     
-    fireEvent.change(firstNameField, { target: { value: ''}});
-		fireEvent.blur(firstNameField);
-
-		fireEvent.change(departmentField, { target: { value: ''}});
+		fireEvent.change(departmentField, { target: { value: 'Literary'}});
 		fireEvent.blur(departmentField);
 
-		fireEvent.change(genderField, { target: { value: 'male'}});
-		fireEvent.blur(genderField);
+		fireEvent.change(genderField, { target: { value: 'Male'}});
+    fireEvent.blur(genderField);
+    
+    fireEvent.change(residenceAddress, { target: { value: 'Rome'}});
+		fireEvent.blur(residenceAddress);
 
 		fireEvent.change(currencyField, { target: { value: 'Dollars'}});
 		fireEvent.blur(currencyField);
@@ -661,17 +663,9 @@ describe(' ', () => {
 		fireEvent.change(managerField, { target: { value: '1'}});
     fireEvent.blur(managerField);
     
-    fireEvent.click(rememberInfo)
+    fireEvent.click(rememberInfo);
 
-    fireEvent.submit(submitButton, {preventDefault: jest.fn()});
-
-    fireEvent.change(firstNameField, { target: { value: 'user'}});
-		fireEvent.blur(firstNameField);
-
-		fireEvent.change(departmentField, { target: { value: 'devops'}});
-    fireEvent.blur(departmentField);
-    
-    fireEvent.submit(submitButton, {preventDefault: jest.fn()});
+    fireEvent.click(nextStep);
 
     const [
       returnTypeField,
@@ -727,38 +721,44 @@ describe(' ', () => {
 
     const [
 			departmentField,
-			firstNameField,
+      firstNameField,
+      lastNameField,
 			managerField,
-			genderField,
+      genderField,
+      residenceAddress,
 			currencyField,
 			languageField,
 			rememberInfo,
       submitButton,
+      nextStep,
     ] = await waitForElement(() => [
 			getByPlaceholderText('Enter Department'),
-			getByPlaceholderText('Enter First Name'),
+      getByPlaceholderText('Enter First Name'),
+      getByPlaceholderText('Enter Last Name'),
 			getByPlaceholderText('Line Manager'),
-			getByPlaceholderText('Select Gender'),
+      getByPlaceholderText('Select Gender'),
+      getByPlaceholderText('Enter Residence Address'),
 			getByPlaceholderText('Preferred Currency'),
 			getByPlaceholderText('Preferred Language'),
       getByTestId('remember'),
       getByTestId('form-user'),
+      getByTestId('nextStep'),
     ]);
 
-		fireEvent.change(firstNameField, { target: { value: ''}});
+		fireEvent.change(firstNameField, { target: { value: 'Dante'}});
     fireEvent.blur(firstNameField);
     
-    fireEvent.change(firstNameField, { target: { value: 'd'}});
-    fireEvent.blur(firstNameField);
-    
-    fireEvent.change(firstNameField, { target: { value: ''}});
-		fireEvent.blur(firstNameField);
+    fireEvent.change(lastNameField, { target: { value: 'Alighieri'}});
+		fireEvent.blur(lastNameField);
 
-		fireEvent.change(departmentField, { target: { value: ''}});
+		fireEvent.change(departmentField, { target: { value: 'Literary'}});
 		fireEvent.blur(departmentField);
 
-		fireEvent.change(genderField, { target: { value: 'male'}});
-		fireEvent.blur(genderField);
+		fireEvent.change(genderField, { target: { value: 'Male'}});
+    fireEvent.blur(genderField);
+    
+    fireEvent.change(residenceAddress, { target: { value: 'Rome'}});
+		fireEvent.blur(residenceAddress);
 
 		fireEvent.change(currencyField, { target: { value: 'Dollars'}});
 		fireEvent.blur(currencyField);
@@ -769,17 +769,9 @@ describe(' ', () => {
 		fireEvent.change(managerField, { target: { value: '1'}});
     fireEvent.blur(managerField);
     
-    fireEvent.click(rememberInfo)
-
-    fireEvent.submit(submitButton, {preventDefault: jest.fn()});
-
-    fireEvent.change(firstNameField, { target: { value: 'user'}});
-		fireEvent.blur(firstNameField);
-
-		fireEvent.change(departmentField, { target: { value: 'devops'}});
-    fireEvent.blur(departmentField);
+    fireEvent.click(rememberInfo);
     
-    fireEvent.submit(submitButton, {preventDefault: jest.fn()});
+    fireEvent.click(nextStep);
 
     const [
       multiCityTypeField,
@@ -863,38 +855,44 @@ describe(' ', () => {
 
     const [
 			departmentField,
-			firstNameField,
+      firstNameField,
+      lastNameField,
 			managerField,
-			genderField,
+      genderField,
+      residenceAddress,
 			currencyField,
 			languageField,
 			rememberInfo,
       submitButton,
+      nextStep,
     ] = await waitForElement(() => [
 			getByPlaceholderText('Enter Department'),
-			getByPlaceholderText('Enter First Name'),
+      getByPlaceholderText('Enter First Name'),
+      getByPlaceholderText('Enter Last Name'),
 			getByPlaceholderText('Line Manager'),
-			getByPlaceholderText('Select Gender'),
+      getByPlaceholderText('Select Gender'),
+      getByPlaceholderText('Enter Residence Address'),
 			getByPlaceholderText('Preferred Currency'),
 			getByPlaceholderText('Preferred Language'),
       getByTestId('remember'),
       getByTestId('form-user'),
+      getByTestId('nextStep'),
     ]);
 
-		fireEvent.change(firstNameField, { target: { value: ''}});
+		fireEvent.change(firstNameField, { target: { value: 'Dante'}});
     fireEvent.blur(firstNameField);
     
-    fireEvent.change(firstNameField, { target: { value: 'd'}});
-    fireEvent.blur(firstNameField);
-    
-    fireEvent.change(firstNameField, { target: { value: ''}});
-		fireEvent.blur(firstNameField);
+    fireEvent.change(lastNameField, { target: { value: 'Alighieri'}});
+    fireEvent.blur(lastNameField);
 
-		fireEvent.change(departmentField, { target: { value: ''}});
+		fireEvent.change(departmentField, { target: { value: 'Literary'}});
 		fireEvent.blur(departmentField);
 
-		fireEvent.change(genderField, { target: { value: 'male'}});
-		fireEvent.blur(genderField);
+    fireEvent.change(genderField, { target: { value: 'Male'}});
+    fireEvent.blur(genderField);
+    
+    fireEvent.change(residenceAddress, { target: { value: 'Rome'}});
+		fireEvent.blur(residenceAddress);
 
 		fireEvent.change(currencyField, { target: { value: 'Dollars'}});
 		fireEvent.blur(currencyField);
@@ -905,17 +903,9 @@ describe(' ', () => {
 		fireEvent.change(managerField, { target: { value: '1'}});
     fireEvent.blur(managerField);
     
-    fireEvent.click(rememberInfo)
-
-    fireEvent.submit(submitButton, {preventDefault: jest.fn()});
-
-    fireEvent.change(firstNameField, { target: { value: 'user'}});
-		fireEvent.blur(firstNameField);
-
-		fireEvent.change(departmentField, { target: { value: 'devops'}});
-    fireEvent.blur(departmentField);
+    fireEvent.click(rememberInfo);
     
-    fireEvent.submit(submitButton, {preventDefault: jest.fn()});
+    fireEvent.click(nextStep);
 
     const [
       addTripButton,
@@ -937,7 +927,7 @@ describe(' ', () => {
 
   });
 
-  test('User can delete a multi-city trip form', async () => {
+  test('User can go back to profile information form', async () => {
     getLocations.mockImplementation(() => Promise.resolve(locations));
     getLocationsWithHotels.mockImplementation(() => Promise.resolve(locationWithHotels));
     createATrip.mockImplementation(() => Promise.resolve(responseData));
@@ -955,39 +945,45 @@ describe(' ', () => {
 
     const [
 			departmentField,
-			firstNameField,
+      firstNameField,
+      lastNameField,
 			managerField,
-			genderField,
+      genderField,
+      residenceAddress,
 			currencyField,
 			languageField,
 			rememberInfo,
       submitButton,
+      nextStep,
     ] = await waitForElement(() => [
 			getByPlaceholderText('Enter Department'),
-			getByPlaceholderText('Enter First Name'),
+      getByPlaceholderText('Enter First Name'),
+      getByPlaceholderText('Enter Last Name'),
 			getByPlaceholderText('Line Manager'),
-			getByPlaceholderText('Select Gender'),
+      getByPlaceholderText('Select Gender'),
+      getByPlaceholderText('Enter Residence Address'),
 			getByPlaceholderText('Preferred Currency'),
 			getByPlaceholderText('Preferred Language'),
       getByTestId('remember'),
       getByTestId('form-user'),
+      getByTestId('nextStep'),
     ]);
 
-		fireEvent.change(firstNameField, { target: { value: ''}});
+		fireEvent.change(firstNameField, { target: { value: 'Dante'}});
     fireEvent.blur(firstNameField);
     
-    fireEvent.change(firstNameField, { target: { value: 'd'}});
-    fireEvent.blur(firstNameField);
-    
-    fireEvent.change(firstNameField, { target: { value: ''}});
-		fireEvent.blur(firstNameField);
+    fireEvent.change(lastNameField, { target: { value: 'Alighieri'}});
+    fireEvent.blur(lastNameField);
 
-		fireEvent.change(departmentField, { target: { value: ''}});
+		fireEvent.change(departmentField, { target: { value: 'Literary'}});
 		fireEvent.blur(departmentField);
 
-		fireEvent.change(genderField, { target: { value: 'male'}});
-		fireEvent.blur(genderField);
-
+    fireEvent.change(genderField, { target: { value: 'Male'}});
+    fireEvent.blur(genderField);
+    
+    fireEvent.change(residenceAddress, { target: { value: 'Rome'}});
+    fireEvent.blur(residenceAddress);
+    
 		fireEvent.change(currencyField, { target: { value: 'Dollars'}});
 		fireEvent.blur(currencyField);
 
@@ -997,27 +993,17 @@ describe(' ', () => {
 		fireEvent.change(managerField, { target: { value: '1'}});
     fireEvent.blur(managerField);
     
-    fireEvent.click(rememberInfo)
-
-    fireEvent.submit(submitButton, {preventDefault: jest.fn()});
-
-    fireEvent.change(firstNameField, { target: { value: 'user'}});
-		fireEvent.blur(firstNameField);
-
-		fireEvent.change(departmentField, { target: { value: 'devops'}});
-    fireEvent.blur(departmentField);
+    fireEvent.click(rememberInfo);
     
-    fireEvent.submit(submitButton, {preventDefault: jest.fn()});
+    fireEvent.click(nextStep);
 
     const [
-      addTripButton,
-
+      backButton,
     ] = await waitForElement(() => [
       getByTestId('back-btn'),
     ]);
 
-
-    fireEvent.click(addTripButton);
+    fireEvent.click(backButton);
 
   });
 
@@ -1040,38 +1026,44 @@ describe(' ', () => {
 
     const [
 			departmentField,
-			firstNameField,
+      firstNameField,
+      lastNameField,
 			managerField,
-			genderField,
+      genderField,
+      residenceAddress,
 			currencyField,
 			languageField,
 			rememberInfo,
       submitButton,
+      nextStep,
     ] = await waitForElement(() => [
 			getByPlaceholderText('Enter Department'),
-			getByPlaceholderText('Enter First Name'),
+      getByPlaceholderText('Enter First Name'),
+      getByPlaceholderText('Enter Last Name'),
 			getByPlaceholderText('Line Manager'),
-			getByPlaceholderText('Select Gender'),
+      getByPlaceholderText('Select Gender'),
+      getByPlaceholderText('Enter Residence Address'),
 			getByPlaceholderText('Preferred Currency'),
 			getByPlaceholderText('Preferred Language'),
       getByTestId('remember'),
       getByTestId('form-user'),
+      getByTestId('nextStep'),
     ]);
 
-		fireEvent.change(firstNameField, { target: { value: ''}});
+		fireEvent.change(firstNameField, { target: { value: 'Dante'}});
     fireEvent.blur(firstNameField);
-    
-    fireEvent.change(firstNameField, { target: { value: 'd'}});
-    fireEvent.blur(firstNameField);
-    
-    fireEvent.change(firstNameField, { target: { value: ''}});
+  
+    fireEvent.change(firstNameField, { target: { value: 'Alighieri'}});
 		fireEvent.blur(firstNameField);
 
-		fireEvent.change(departmentField, { target: { value: ''}});
+		fireEvent.change(departmentField, { target: { value: 'Literary'}});
 		fireEvent.blur(departmentField);
 
-		fireEvent.change(genderField, { target: { value: 'male'}});
-		fireEvent.blur(genderField);
+		fireEvent.change(genderField, { target: { value: 'Male'}});
+    fireEvent.blur(genderField);
+    
+    fireEvent.change(residenceAddress, { target: { value: 'Rome'}});
+		fireEvent.blur(residenceAddress);
 
 		fireEvent.change(currencyField, { target: { value: 'Dollars'}});
 		fireEvent.blur(currencyField);
@@ -1082,17 +1074,9 @@ describe(' ', () => {
 		fireEvent.change(managerField, { target: { value: '1'}});
     fireEvent.blur(managerField);
     
-    fireEvent.click(rememberInfo)
-
-    fireEvent.submit(submitButton, {preventDefault: jest.fn()});
-
-    fireEvent.change(firstNameField, { target: { value: 'user'}});
-		fireEvent.blur(firstNameField);
-
-		fireEvent.change(departmentField, { target: { value: 'devops'}});
-    fireEvent.blur(departmentField);
+    fireEvent.click(rememberInfo);
     
-    fireEvent.submit(submitButton, {preventDefault: jest.fn()});
+    fireEvent.click(nextStep);
 
     const [
       multiCityTypeField,

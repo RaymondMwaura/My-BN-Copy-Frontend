@@ -8,13 +8,15 @@ import {
   markAllAsRead,
   notificationView
 } from "../../../lib/services/notificationService";
-import { wait, waitForElement } from "@testing-library/dom";
+import { waitFor } from "@testing-library/dom";
 import localStorage from "../../../__mocks__/LocalStorage";
 import { getUserProfile, getUsers } from '../../../lib/services/user.service';
+import { getHotels } from '../../../lib/services/accommodation.service';
 
 jest.mock("../../../lib/services/notificationService");
 jest.mock("../../../lib/services/user.service");
 jest.mock("socket.io-client");
+jest.mock('../../../lib/services/accommodation.service');
 
 const initialState = {
   notificationState: {
@@ -158,6 +160,37 @@ const managers = {
   }
 };
 
+const hotels = {
+	data: {
+		status: 'success',
+		message: 'Hotels retrieved successfully',
+		data: [
+			{
+				id: 1,
+				name: 'Golden Hotel',
+				image: '1587473844293-Luxury-Hotel.jpg',
+				description: 'The best hotel ever built',
+				street: 'Gold Street',
+				services: 'Everything you ever wished for',
+				average_rating: '0.00',
+				createdAt: '2020-04-21T12:57:40.975Z',
+				likesCount: '0',
+				unLikesCount: '0',
+				likes: [],
+				location: {
+					id: 1,
+					country: 'Kenya',
+					city: 'Nairobi',
+					long: null,
+					lat: null,
+					createdAt: '2020-04-21T11:42:17.638Z',
+					updatedAt: '2020-04-21T11:42:17.638Z',
+				},
+			},
+		],
+	},
+};
+
 notificationView.mockImplementation(() => Promise.resolve({
     data: {
       "status": "success",
@@ -203,6 +236,7 @@ afterEach(cleanup);
 describe("NavLinkItem template component", () => {
 
   it("should display \"No unread notifications\" when no notification is present", () => {
+    getHotels.mockImplementation(() => Promise.resolve(hotels));
     getUserProfile.mockImplementation(() => Promise.resolve(userProfile));
     getUsers.mockImplementation(() => Promise.resolve(managers));
     const { getByText } = render(
@@ -215,6 +249,7 @@ describe("NavLinkItem template component", () => {
   });
 
   it("should display \"Mark all as read\" when there are some notifications", async () => {
+    getHotels.mockImplementation(() => Promise.resolve(hotels));
     getUserProfile.mockImplementation(() => Promise.resolve(userProfile));
     getUsers.mockImplementation(() => Promise.resolve(managers));
 
@@ -225,7 +260,7 @@ describe("NavLinkItem template component", () => {
       initialState
     );
 
-    const notificationHeader = await waitForElement(
+    const notificationHeader = await waitFor(
       () => getByText("Mark all as read"));
 
     notificationView.mockImplementation(() => Promise.resolve({
@@ -248,12 +283,13 @@ describe("NavLinkItem template component", () => {
     ));
     fireEvent.click(notificationHeader);
 
-    await wait(() => {
+    await waitFor(() => {
       expect(getByText("No unread notifications")).toBeInTheDocument();
     });
   });
 
   it("should display \"Mark all as read\" when one notification was read and others are still there", () => {
+    getHotels.mockImplementation(() => Promise.resolve(hotels));
     getUserProfile.mockImplementation(() => Promise.resolve(userProfile));
     getUsers.mockImplementation(() => Promise.resolve(managers));
     const { getByText } = render(

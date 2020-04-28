@@ -117,6 +117,7 @@ export class CreateRooms extends Component {
 								required
 								name='type'
 								onChange={event => this.handleChange(event)}
+								data-test='type'
 							>
 								<option value=''>type</option>
 								{typeSelect.map(({ value, name, id }) => (

@@ -3,7 +3,7 @@ import "@testing-library/jest-dom";
 import "@testing-library/jest-dom/extend-expect";
 import { BrowserRouter } from "react-router-dom";
 import  { SingleHotelPage, mapStateToProps } from '../../views/accomodations/SingleHotelPage';
-import { wait } from '@testing-library/dom';
+import { waitFor } from '@testing-library/dom';
 import render from '../../__mocks__/render';
 import { cleanup } from '@testing-library/react';
 import localStorage from '../../__mocks__/LocalStorage';
@@ -12,10 +12,13 @@ import {
 	getBookingData,
 	getUserRatingData,
 } from '../../lib/services/rating.service';
+import { getHotels } from '../../lib/services/accommodation.service';
 
 jest.mock('../../lib/services/booking.service');
 jest.mock('../../lib/services/rating.service');
 jest.mock('../../lib/services/feedbackService');
+jest.mock('../../lib/services/accommodation.service');
+
 global.$ = jest.fn((cb) => ({
   scrollTop: jest.fn(),
   0: jest.fn(cb =>({
@@ -93,6 +96,36 @@ const ratingDataResponse = {
 	},
 };
 
+const hotels = {
+	data: {
+		status: 'success',
+		message: 'Hotels retrieved successfully',
+		data: [
+			{
+				id: 1,
+				name: 'Golden Hotel',
+				image: '1587473844293-Luxury-Hotel.jpg',
+				description: 'The best hotel ever built',
+				street: 'Gold Street',
+				services: 'Everything you ever wished for',
+				average_rating: '0.00',
+				createdAt: '2020-04-21T12:57:40.975Z',
+				likesCount: '0',
+				unLikesCount: '0',
+				likes: [],
+				location: {
+					id: 1,
+					country: 'Kenya',
+					city: 'Nairobi',
+					long: null,
+					lat: null,
+					createdAt: '2020-04-21T11:42:17.638Z',
+					updatedAt: '2020-04-21T11:42:17.638Z',
+				},
+			},
+		],
+	},
+};
 
 jest.mock('../../components/accomodations/LikeUnlike', () => {
   const ComponentToMock = () => <div />;
@@ -157,6 +190,7 @@ describe('Single Hotel page', () => {
 		localStorage.store = {};
 	});
 	it('should render without error', async () => {
+		getHotels.mockImplementation(() => Promise.resolve(hotels));
 		props = {
       loading: false,
 			data:{
@@ -192,16 +226,17 @@ describe('Single Hotel page', () => {
     getBookingData.mockImplementation(() => Promise.resolve(bookingDataResponse));
     
 		const { getByTestId } = render(<BrowserRouter><SingleHotelPage {...props} /></BrowserRouter>);
-		await wait(() => {
+		await waitFor(() => {
 			expect(getByTestId('single-hotel')).toBeInTheDocument();
 		})
 
 	});
 	it('should render nothing when loading', () => {
+		getHotels.mockImplementation(() => Promise.resolve(hotels));
 		props = {
-      loading: true,
-      status: 'error',
-      getHotel: jest.fn(id => id),
+			loading: true,
+			status: 'error',
+			getHotel: jest.fn(id => id),
 			match: {
 				params: {
 					id: 1
@@ -214,6 +249,7 @@ describe('Single Hotel page', () => {
 
 	it('should render not reserved rooms', () => {
 
+		getHotels.mockImplementation(() => Promise.resolve(hotels));
     getUserRatingData.mockImplementation(() => Promise.resolve(ratingDataResponse));
     getBookingData.mockImplementation(() => Promise.resolve(bookingDataResponse));
 
@@ -252,6 +288,7 @@ describe('Single Hotel page', () => {
 	});
 
 	it('Should return initial data', () => {
+		getHotels.mockImplementation(() => Promise.resolve(hotels));
     const initialState = {
 			singleHotelState: {
           data: null,
