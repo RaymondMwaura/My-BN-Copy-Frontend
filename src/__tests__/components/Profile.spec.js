@@ -222,7 +222,6 @@ describe('User should be be able to view and edit profile', () => {
 		localStorage.store = {};
 	});
 
-	// afterEach(cleanup);
 	test('User can view profile information', async () => {
 		getHotels.mockImplementation(() => Promise.resolve(hotels));
 		getUserProfile.mockImplementation(() => Promise.resolve(userProfile));
