@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -9,6 +10,7 @@ export default function TextArea({
 	required,
 	label,
 	testId,
+	minimumLength,
 }) {
 	return (
 		<div data-test='input-form'>
@@ -18,14 +20,14 @@ export default function TextArea({
 				className='form-control'
 				placeholder={placeholder}
 				onChange={onChange}
-				minLength='10'
+				minLength={minimumLength}
 				maxLength='200'
 				required={required}
 				value={value}
 				data-testid={testId}
 			/>
 			<span data-testid='error-text' className='invalid-feedback'>
-				should have at least 15 characters...
+				should have at least ${minimumLength} characters...
 			</span>
 		</div>
 	);
@@ -39,6 +41,7 @@ TextArea.propTypes = {
 	onChange: PropTypes.func,
 	required: PropTypes.bool,
 	testId: PropTypes.string,
+	minimumLength: PropTypes.string,
 };
 
 TextArea.defaultProps = {
@@ -47,4 +50,5 @@ TextArea.defaultProps = {
 	onChange: null,
 	required: false,
 	testId: null,
+	minimumLength: '10',
 };

@@ -1,6 +1,9 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable max-len */
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import { getHotel } from '../store/actions/accomodations/getAccomodationActions';
 import Hotel from './accomodations/Hotel';
 import Room from './accomodations/Room';
@@ -147,6 +150,7 @@ class BookingContainer extends Component {
 										placeholder='Arrival Date'
 										onBlur={event =>
 											this.validate({ name: 'arrivalDate', event })}
+										min={new Date().toISOString().split('T')[0]}
 									/>
 									<InputForm
 										name='leavingDate'
@@ -160,8 +164,14 @@ class BookingContainer extends Component {
 										required
 										placeholder='Leaving Date'
 										onBlur={event =>
-											this.validate({ name: 'leavingDate', event })
+											this.validate({ name: 'leavingDate', event })}
+										min={
+											moment(state.arrivalDate)
+												.add(1, 'days')
+												.format()
+												.split('T')[0]
 										}
+										data-testid='returnDate'
 									/>
 								</div>
 								<div className='d-flex ml-4 mt-2'>
@@ -233,8 +243,10 @@ BookingContainer.propTypes = {
 	loading: PropTypes.bool.isRequired,
 	status: PropTypes.string.isRequired,
 	data: PropTypes.instanceOf(Object),
+	history: PropTypes.instanceOf(Object),
 };
 
 BookingContainer.defaultProps = {
 	data: null,
+	history: null,
 };
