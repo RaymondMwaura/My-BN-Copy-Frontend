@@ -184,6 +184,7 @@ export class CreateRequest extends Component {
 						required
 						value={el.reason || ''}
 						testId='reason'
+						minimumLength='30'
 					/>
 				</div>
 				<div className='deleteTripForm'>
