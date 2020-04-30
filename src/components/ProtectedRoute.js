@@ -12,11 +12,14 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import JWTDecode from "jwt-decode";
 import queryString from "query-string";
-import toast from "../lib/toast";
-import setAuthenticate from "../store/actions/authenticateAction";
+import Cookies from 'universal-cookie';
+import { setAuthenticate, logoutUser } from "../store/actions/authenticateAction";
 import { storeToken, decodeToken } from "../helpers/authHelper";
 import { nowSeconds } from "../lib/time";
 import check2FA from "../utils/check2FA";
+import { updateNavbar } from '../store/actions/navbar/navbarActions';
+import toast from '../lib/toast';
+ 
 /**
  * ProtectedRoute
  * @param setAuthState
@@ -27,6 +30,7 @@ import check2FA from "../utils/check2FA";
  */
 export const ProtectedRoute = ({
 	setAuthState,
+	logout,
 	component: Component,
 	...rest
 }) => {
@@ -46,7 +50,15 @@ export const ProtectedRoute = ({
 	const isAuthenticated = !!localStorage.bn_user_data ||
 		(queries.token && (nowSeconds - userData.iat < 3));
 
-	!isAuthenticated && toast("error", "You need to be logged in");
+	const cookies = new Cookies();
+	const authCookie = cookies.get('bn_auth_token');
+
+	if (!isAuthenticated || !authCookie) {
+		logout();
+		updateNavbar();
+		toast('info', 'Login required');
+		return <Redirect to='/home' />;
+	}
 
 	return (
 		<Route
@@ -66,14 +78,18 @@ export const ProtectedRoute = ({
 ProtectedRoute.propTypes = {
 	component: PropTypes.any,
 	location: PropTypes.shape({ pathname: PropTypes.string.isRequired }),
-	setAuthState: PropTypes.func.isRequired
+	setAuthState: PropTypes.func.isRequired,
+	logout: PropTypes.func
 };
 
 ProtectedRoute.defaultProps = {
 	location: null,
 	component: null,
+	logout: null
 };
 
 export default connect(null, {
 	setAuthState: setAuthenticate,
+	logout: logoutUser,
+	updateNavbar
 })(ProtectedRoute);

@@ -76,3 +76,5 @@ export const getBookStatus = (arrivalDate, leaving) => {
 };
 
 export const nowSeconds = Math.floor(Date.now() / 1000);
+
+export const nowMilliseconds = new Date();

@@ -90,6 +90,10 @@ describe('Login Actions Test Suite', () => {
         payload: 'success',
         type: LOGIN_SUCCESS
       },
+      {
+        payload: undefined,
+        type: "IS_AUTHENTICATED",
+      },
       actionFunc(LOADING, false),
       {
         payload: false,

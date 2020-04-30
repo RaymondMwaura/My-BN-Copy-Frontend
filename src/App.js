@@ -33,34 +33,39 @@ import ViewBooking from './components/ViewBookingContainer';
 import TravelStatsPage from './views/TravelStatsPage';
 import CreateRequestView from './views/requests/CreateRequestView';
 import { updateNavbar } from './store/actions/navbar/navbarActions';
-import setAuthenticate from './store/actions/authenticateAction';
-import { nowSeconds } from './lib/time';
+import { logoutUser } from './store/actions/authenticateAction';
+import { nowMilliseconds } from './lib/time';
 import BookingPayment from './components/payments/BookingPayment';
 import TravelDocuments from './components/TravelDocuments';
 import LoginTwoFAPage from './views/LoginTwoFAPage';
 import SettingsPage from './views/settings/SettingsPage';
+import toast from './lib/toast';
 
 /**
  * App component
  * @param isAuthenticated
- * @param setAuthenticate
+ * @param logoutUser
  * @param updateNavbar
  * @returns {*}
  * @constructor
  */
-export const App = ({ isAuthenticated, setAuthenticate, updateNavbar }) => {
-	const { exp } = localStorage.getItem('bn_user_data')
-		? JSON.parse(localStorage.getItem('bn_user_data'))
-		: { exp: nowSeconds };
-	const diffToExpiration = exp - nowSeconds;
+export const App = ({ isAuthenticated, logout, updateNavbar }) => {
+	let exp = localStorage.getItem('bn_user_data')
+		? JSON.parse(localStorage.getItem('bn_user_data')).exp
+		: nowMilliseconds;
+	exp = new Date(parseInt(exp, 10) * 1000);
+	const diffToExpiration = exp - nowMilliseconds;
 	const positiveDifferenceOrZero = diffToExpiration > 0 ? diffToExpiration : 0;
 
 	useEffect(() => {
 		if (isAuthenticated) {
-			setTimeout(() => {
-				setAuthenticate(false);
+			const authSetTimeOutID = setTimeout(() => {
+				logout(false);
 				updateNavbar();
-			}, positiveDifferenceOrZero * 1000);
+				toast('info', 'Session expired, login required');
+				localStorage.removeItem('bn_authSetTimeOutID');
+			}, positiveDifferenceOrZero);
+			localStorage.setItem('bn_authSetTimeOutID', authSetTimeOutID);
 		}
 	}, [isAuthenticated]);
 
@@ -165,7 +170,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-	setAuthenticate,
+	logout: logoutUser,
 	updateNavbar,
 };
 
@@ -173,6 +178,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(App);
 
 App.propTypes = {
 	isAuthenticated: Proptypes.bool.isRequired,
-	setAuthenticate: Proptypes.func.isRequired,
+	logout: Proptypes.func.isRequired,
 	updateNavbar: Proptypes.func.isRequired,
 };
