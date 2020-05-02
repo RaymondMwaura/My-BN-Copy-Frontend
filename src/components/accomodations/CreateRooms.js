@@ -139,6 +139,7 @@ export class CreateRooms extends Component {
 							value={state.imageName}
 							onChange={event => this.handleFile(event)}
 							label='Choose image'
+							accept='image/png, image/jpeg, image/jpg'
 						/>
 						{roomTextArea.map(({ id, name, placeholder, label }) => (
 							<TextArea

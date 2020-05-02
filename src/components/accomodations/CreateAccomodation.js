@@ -131,6 +131,7 @@ export class CreateAccomodation extends Component {
 							onChange={event => this.handleFile(event)}
 							label='Choose image'
 							required='required'
+							accept='image/png, image/jpeg, image/jpg'
 						/>
 					</div>
 					<div className='ml-5'>
