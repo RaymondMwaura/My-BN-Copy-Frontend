@@ -2,7 +2,6 @@
 import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { accountLinks } from '../utils/userAccountLinks';
 import PropTypes from 'prop-types';
 import Logout from './auth/Logout';
 import { fetchUserProfile } from '../store/actions/profile/profileActions';
@@ -21,11 +20,15 @@ const UserAccount = ({ items }) => {
 	);
 
 	useEffect(() => {
-		const { userId } = JSON.parse(localStorage.bn_user_data);
+		const userId = localStorage.bn_user_data
+			? JSON.parse(localStorage.bn_user_data).userId
+			: false;
 		const fetchData = async aUserId => {
 			await dispatch(fetchUserProfile(aUserId));
 		};
-		fetchData(userId);
+		if (userId !== false) {
+			fetchData(userId);
+		}
 	}, []);
 
 	useEffect(() => {

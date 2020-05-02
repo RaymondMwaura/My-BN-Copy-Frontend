@@ -9,27 +9,25 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import setAuthenticate from '../../store/actions/authenticateAction';
+import { logoutUser } from '../../store/actions/authenticateAction';
 import { updateNavbar } from '../../store/actions/navbar/navbarActions';
-import clearStats from '../../store/actions/profile/profileStatsActions';
 
 /**
  * Logout
  * @param history
- * @param setAuthState
+ * @param logoutUser
  * @param updateNavbar
  * @returns {*}
  * @constructor
  */
-export const Logout = ({ history, setAuthState, updateNavbar, clearStats }) => (
+export const Logout = ({ history, logoutUser, updateNavbar }) => (
 	<button
 		type='button'
 		className='dropdown-item'
 		href='/home'
 		onClick={() => {
-			setAuthState(false);
+			logoutUser();
 			updateNavbar();
-			clearStats();
 			history.push('/home');
 		}}
 	>
@@ -38,13 +36,13 @@ export const Logout = ({ history, setAuthState, updateNavbar, clearStats }) => (
 );
 
 Logout.defaultProps = {
-	setAuthState: null,
+	logoutUser: null,
 	updateNavbar: null,
 	history: null,
 };
 
 Logout.propTypes = {
-	setAuthState: PropTypes.func,
+	logoutUser: PropTypes.func,
 	history: PropTypes.shape({
 		push: PropTypes.func,
 	}),
@@ -53,8 +51,7 @@ Logout.propTypes = {
 
 export default withRouter(
 	connect(null, {
-		setAuthState: setAuthenticate,
+		logoutUser,
 		updateNavbar,
-		clearStats,
 	})(Logout),
 );

@@ -9,7 +9,7 @@ import {
 	revertChanges,
 } from '../store/actions/profile/profileActions';
 import { getRequests } from '../store/actions/requestAction';
-import setAuthenticate from '../store/actions/authenticateAction';
+import { setAuthenticate } from '../store/actions/authenticateAction';
 import Profile from '../views/profile/ProfileView';
 import { updateNavbar } from '../store/actions/navbar/navbarActions';
 import { getBooking } from '../store/actions/bookingActions';

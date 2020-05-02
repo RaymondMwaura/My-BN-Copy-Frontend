@@ -4,9 +4,12 @@ import JWTDecode from 'jwt-decode';
 const cookies = new Cookies();
 
 const storeToken = token => {
+	let expiryDate = JWTDecode(token).exp;
+	expiryDate = parseInt(expiryDate, 10) * 1000;
+	expiryDate = new Date(expiryDate);
 	cookies.set('bn_auth_token', token, {
 		path: '/',
-		maxAge: 86400,
+		expires: expiryDate,
 	});
 };
 

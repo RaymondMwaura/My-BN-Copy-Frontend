@@ -3,10 +3,14 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import queryString from 'query-string';
+import Cookies from 'universal-cookie';
 import HotelCard from '../components/accomodations/HotelCard';
 // eslint-disable-next-line max-len
 import { getAllHotels } from '../store/actions/accomodations/getAccomodationActions';
-import setAuthenticate from '../store/actions/authenticateAction';
+import {
+	setAuthenticate,
+	logoutUser,
+} from '../store/actions/authenticateAction';
 import checkRole from '../utils/checkRole';
 import { updateNavbar } from '../store/actions/navbar/navbarActions';
 import LoadingPlaceholder from '../components/templates/LoadingPlaceholder';
@@ -21,6 +25,8 @@ export const HomePage = ({
 	status,
 	setAuth,
 	updateNav,
+	logout,
+	isAuthenticated,
 	...rest
 }) => {
 	const [role, setRole] = useState(null);
@@ -81,6 +87,14 @@ export const HomePage = ({
 		);
 	}
 
+	const cookies = new Cookies();
+	const authCookie = cookies.get('bn_auth_token');
+
+	if (!isAuthenticated || !authCookie) {
+		logout();
+		updateNavbar();
+	}
+
 	return (
 		<div className='container pt-5'>
 			<LoadingPlaceholder />
@@ -92,6 +106,7 @@ export const mapStateToProps = state => ({
 	loading: state.loadingState.buttonLoading,
 	status: state.hotelState.status,
 	data: state.hotelState.data,
+	isAuthenticated: state.authState.isAuthenticated,
 });
 
 HomePage.propTypes = {
@@ -101,16 +116,21 @@ HomePage.propTypes = {
 	loading: PropTypes.bool,
 	status: PropTypes.string,
 	data: PropTypes.arrayOf(PropTypes.any),
+	logout: PropTypes.func,
+	isAuthenticated: PropTypes.bool,
 };
 
 HomePage.defaultProps = {
 	loading: null,
 	status: null,
 	data: null,
+	logout: null,
+	isAuthenticated: null,
 };
 
 export default connect(mapStateToProps, {
 	getHotels: getAllHotels,
 	setAuth: setAuthenticate,
 	updateNav: updateNavbar,
+	logout: logoutUser,
 })(HomePage);

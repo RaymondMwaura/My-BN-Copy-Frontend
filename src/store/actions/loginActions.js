@@ -1,5 +1,11 @@
 import toast from '../../lib/toast';
-import { LOGIN_FAILURE, LOGIN_SUCCESS, BUTTON_LOADING, LOADING } from './types';
+import {
+	LOGIN_FAILURE,
+	LOGIN_SUCCESS,
+	BUTTON_LOADING,
+	LOADING,
+	IS_AUTHENTICATED,
+} from './types';
 import actionFunc from '../../utils/actionFunc';
 import apiCall from '../../utils/api';
 import { storeToken, decodeToken } from '../../helpers/authHelper';
@@ -14,6 +20,7 @@ const login = userRequest => async dispatch => {
 		decodeToken(res.data.data.token);
 		check2FA(res.data.data);
 		dispatch(actionFunc(LOGIN_SUCCESS, res.data.message));
+		dispatch(actionFunc(IS_AUTHENTICATED));
 		dispatch(actionFunc(LOADING, false));
 	} catch (error) {
 		dispatch(actionFunc(LOGIN_FAILURE, error.response.data.message));

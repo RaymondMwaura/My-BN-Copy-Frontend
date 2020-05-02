@@ -210,7 +210,10 @@ describe("App component", () => {
 	let store, props;
 	beforeEach(() => {
 		store = makeMockStore(initialState);
-		props = { setAuthenticate: jest.fn(), updateNavbar: jest.fn() };
+		props = {
+			logout: jest.fn(),
+			updateNavbar: jest.fn()
+		};
 	});
 	it("should render without error", () => {
 		props = {...props, ...{isAuthenticated: false}};
