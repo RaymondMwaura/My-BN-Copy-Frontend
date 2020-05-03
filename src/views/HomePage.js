@@ -53,10 +53,13 @@ export const HomePage = ({
 		}
 	}
 
+	const cookies = new Cookies();
+	const authCookie = cookies.get('bn_auth_token');
+
 	if (!loading && status === 'success') {
 		return (
 			<div className='container mt-7' data-testid='home-page'>
-				{role ? (
+				{role && authCookie ? (
 					<div>
 						<Link to='/hotel/create' className='btn btn-primary mb-5'>
 							Create New Hotel
@@ -87,10 +90,7 @@ export const HomePage = ({
 		);
 	}
 
-	const cookies = new Cookies();
-	const authCookie = cookies.get('bn_auth_token');
-
-	if (!isAuthenticated || !authCookie) {
+	if (isAuthenticated === false && !authCookie) {
 		logout();
 		updateNavbar();
 	}
