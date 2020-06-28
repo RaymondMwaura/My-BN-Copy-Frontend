@@ -53,9 +53,7 @@ export const App = ({ isAuthenticated, logout, updateNavbar }) => {
 	let exp = localStorage.getItem('bn_user_data')
 		? JSON.parse(localStorage.getItem('bn_user_data')).exp
 		: nowMilliseconds;
-	if (typeof exp === 'string') {
-		exp = new Date(parseInt(exp, 10) * 1000);
-	}
+	exp = new Date(parseInt(exp, 10) * 1000);
 	const diffToExpiration = exp - nowMilliseconds;
 	const positiveDifferenceOrZero = diffToExpiration > 0 ? diffToExpiration : 0;
 
