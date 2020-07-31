@@ -24,7 +24,7 @@ const login = userRequest => async dispatch => {
 		dispatch(actionFunc(LOADING, false));
 	} catch (error) {
 		dispatch(actionFunc(LOGIN_FAILURE, error.response.data.message));
-		toast(error.response.data.status, error.response.data.message);
+		toast('error', JSON.stringify(error.response.data.message));
 		dispatch(actionFunc(LOADING, false));
 	}
 	dispatch(actionFunc(BUTTON_LOADING, false));
