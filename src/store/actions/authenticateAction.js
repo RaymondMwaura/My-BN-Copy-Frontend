@@ -10,7 +10,7 @@ import {
 import { decodeToken } from '../../helpers/authHelper';
 import clearStats from './profile/profileStatsActions';
 
-const logoutUser = (unsetTimeout = true) => dispatch => {
+const logoutUser = unsetTimeout => dispatch => {
 	const cookies = new Cookies();
 	cookies.remove('bn_auth_token', {
 		path: '/',
@@ -23,7 +23,7 @@ const logoutUser = (unsetTimeout = true) => dispatch => {
 	dispatch(actionFunc(RESET_TWO_FACTOR_STATE));
 	clearStats();
 
-	if (unsetTimeout) {
+	if (unsetTimeout === true) {
 		clearTimeout(localStorage.getItem('bn_authSetTimeOutID'));
 		localStorage.removeItem('bn_authSetTimeOutID');
 	}

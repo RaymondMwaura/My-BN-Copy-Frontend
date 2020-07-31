@@ -26,7 +26,7 @@ export const Logout = ({ history, logoutUser, updateNavbar }) => (
 		className='dropdown-item'
 		href='/home'
 		onClick={() => {
-			logoutUser();
+			logoutUser(true);
 			updateNavbar();
 			history.push('/home');
 		}}

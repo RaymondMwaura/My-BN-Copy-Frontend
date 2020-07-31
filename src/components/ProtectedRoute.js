@@ -54,7 +54,7 @@ export const ProtectedRoute = ({
 	const authCookie = cookies.get('bn_auth_token');
 
 	if (!isAuthenticated || !authCookie) {
-		logout();
+		logout(true);
 		updateNavbar();
 		toast('info', 'Login required');
 		return <Redirect to='/home' />;

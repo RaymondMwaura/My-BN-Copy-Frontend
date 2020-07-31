@@ -91,7 +91,7 @@ export const HomePage = ({
 	}
 
 	if (isAuthenticated === false && !authCookie) {
-		logout();
+		logout(true);
 		updateNavbar();
 	}
 
