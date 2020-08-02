@@ -57,7 +57,7 @@ export const App = ({ isAuthenticated, logout, updateNavbar }) => {
 	if (exp !== nowMilliseconds) {
 		exp = new Date(parseInt(exp, 10) * 1000);
 	}
-		
+
 	const diffToExpiration = exp - nowMilliseconds;
 	const positiveDifferenceOrZero = diffToExpiration > 0 ? diffToExpiration : 0;
 

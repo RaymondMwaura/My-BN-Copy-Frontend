@@ -40,6 +40,9 @@ export const validation = {
 	isRequired: {
 		error: 'Please enter some data in this field',
 	},
+	validPhoneNumber: {
+		error: 'Please enter a valid phone number eg. "+254712345678"',
+	},
 };
 
 export const isEmail = email => {

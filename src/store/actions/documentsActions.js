@@ -2,8 +2,8 @@ import { LOADING, FETCH_DOCUMENTS_SUCCESS } from './types';
 import {
 	fetchDocuments,
 	uploadDocument,
-  verifyDocument,
-  deleteDocument,
+	verifyDocument,
+	deleteDocument,
 } from '../../lib/services/documentsService';
 import actionFunc from '../../utils/actionFunc';
 import Toast from '../../lib/toast';

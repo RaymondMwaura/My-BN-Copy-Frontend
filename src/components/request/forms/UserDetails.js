@@ -149,7 +149,7 @@ export class UserDetails extends Component {
 									name: 'lineManager',
 									value: event.target.value,
 								})
-						}
+							}
 							classNames={`form-control form-control-sm ${errors.lineManagerError &&
 								'is-invalid'}`}
 						/>

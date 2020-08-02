@@ -67,18 +67,27 @@ describe('<Register /> Test Suite', () => {
     const lastName = { target: { name: 'lastName', value: 'Mastel' } };
     const email = { target: { name: 'email', value: 'mastel@gmail.com' } };
     const password = { target: { name: 'password', value: 'example@pass' } };
+    const phoneNumber = { target: { name: 'phoneNumber', value: '+254712345678' } };
 
     component.find('[data-test="first-name"]').simulate('change', firstName);
     component.find('[data-test="last-name"]').simulate('change', lastName);
     component.find('[data-test="email"]').simulate('change', email);
     component.find('[data-test="password"]').simulate('change', password);
+    component.find('[data-test="phone_number"]').simulate('change', phoneNumber);
     component.find('[data-test="submit"]').simulate('click');
     component.find('LayoutForms').simulate('submit', {
       preventDefault() {},
       target: {checkValidity: () => true}
     });
     expect(handleSubmitSpy).toHaveBeenCalled();
-    expect(component.state()).toEqual({ checkError: 'was-validated', firstName: 'Pierrette', lastName: 'Mastel', email: 'mastel@gmail.com', password: 'example@pass' });
+    expect(component.state()).toEqual({
+      checkError: 'was-validated',
+      firstName: 'Pierrette',
+      lastName: 'Mastel',
+      email: 'mastel@gmail.com',
+      password: 'example@pass',
+      phoneNumber: '+254712345678'
+    });
     expect(signupSpy).toHaveBeenCalled();
   });
 

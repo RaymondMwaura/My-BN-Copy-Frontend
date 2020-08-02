@@ -19,6 +19,7 @@ export class Register extends Component {
 			firstName: '',
 			lastName: '',
 			email: '',
+			phoneNumber: '',
 			password: '',
 		};
 	}
@@ -32,13 +33,13 @@ export class Register extends Component {
 
 	handleSubmit(event) {
 		event.preventDefault();
-		const { firstName, lastName, email, password } = this.state;
+		const { firstName, lastName, email, phoneNumber, password } = this.state;
 		this.setState({
 			checkError: 'was-validated',
 		});
 		if (event.target.checkValidity()) {
 			const { props } = this;
-			const data = { firstName, lastName, email, password };
+			const data = { firstName, lastName, email, phoneNumber, password };
 			props.signup(data);
 		}
 	}
