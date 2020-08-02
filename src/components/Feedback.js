@@ -52,8 +52,7 @@ class Feedback extends Component {
 			<div className='feedbackContainer'>
 				<h3 className='mb-4 text-primary'>Feedback</h3>
 				<ul className='list-unstyled'>
-					{props.feedback
-						.map(feed => (
+					{props.feedback.map(feed => (
 						<li className='media mb-4' key={feed.id}>
 							<div className='mr-3'>
 								<div className='icon-feedback'>NZ</div>

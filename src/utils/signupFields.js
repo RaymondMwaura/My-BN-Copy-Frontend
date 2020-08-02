@@ -28,6 +28,15 @@ const signupFields = [
 	},
 	{
 		id: 4,
+		name: 'phoneNumber',
+		type: 'tel',
+		validationKey: 'validPhoneNumber',
+		placeholder: 'Phone Number',
+		dataTestKey: 'phone_number',
+		isRequired: true,
+	},
+	{
+		id: 5,
 		name: 'password',
 		type: 'password',
 		validationKey: 'validPassword',
